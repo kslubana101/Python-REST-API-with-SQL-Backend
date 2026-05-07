@@ -32,12 +32,11 @@ This project is a Python-based REST API backend built using Flask and SQLAlchemy
 python-rest-api/
 │
 ├── app.py
-├── requirements.txt
 ├── config.py
+├── requirements.txt
 │
 ├── database/
-│   ├── models.py
-│   └── database.db
+│   └── models.py
 │
 ├── routes/
 │   └── api_routes.py
@@ -47,26 +46,27 @@ python-rest-api/
 │
 └── utils/
     └── helpers.py
+```
 
-## How to Run
+## 💻 How To Run
 
-### 1. Clone the Repository
-```bash
-git clone https://github.com/yourusername/python-rest-api.git
+1.  **Clone the Repository**
+    ```bash
+    git clone https://github.com/yourusername/python-rest-api.git
 cd python-rest-api
+    ```
+2.  **Create Virtual Environment**
+    python3 -m venv venv
+    source venv/bin/activate
+    
+4.  **Install Dependencies**
+    * pip install -r requirements.txt
+5.  **Run**
+    * v
 
-### 2. Create Virtual Environment
-```bash
-python -m venv venv
-venv\Scripts\activate
+---
 
-### 3. Install Dependencies
-```bash
-pip install -r requirements.txt
+## Source Code
 
-### 4. Run the Applicaiton
-```bash
-python app.py
-The server will start at:
-http:http://127.0.0.1:5000
-
+### Book.java
+```java
