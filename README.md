@@ -81,7 +81,7 @@ GET /records
 ```
 Add New Record
 ```bash 
-Post /records
+POST /records
 ```
 Request Body
 ```bash 
