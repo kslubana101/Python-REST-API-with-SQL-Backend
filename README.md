@@ -69,7 +69,9 @@ cd python-rest-api
     python app.py
 ```
 5.  **Access the Application
+```bash 
 http://127.0.0.1:5000
+```
 ---
 
 ## Source Code
