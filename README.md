@@ -47,3 +47,26 @@ python-rest-api/
 │
 └── utils/
     └── helpers.py
+
+## How to Run
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/yourusername/python-rest-api.git
+cd python-rest-api
+
+### 2. Create Virtual Environment
+```bash
+python -m venv venv
+venv\Scripts\activate
+
+### 3. Install Dependencies
+```bash
+pip install -r requirements.txt
+
+### 4. Run the Applicaiton
+```bash
+python app.py
+The server will start at:
+http:http://127.0.0.1:5000
+
