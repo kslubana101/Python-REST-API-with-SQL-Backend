@@ -48,7 +48,7 @@ python-rest-api/
     └── helpers.py
 ```
 
-## 💻 How To Run
+## How To Run
 
 1. **Clone the Repository**
 ```bash
@@ -62,7 +62,7 @@ cd python-rest-api
 ```
 3.  **Install Dependencies**
 ```bash 
-    * pip install -r requirements.txt
+    pip install -r requirements.txt
 ```
 4.  **Run**
 ```bash 
@@ -120,7 +120,7 @@ if __name__ == "__main__":
     app.run(debug=True)
 ```
 
-### database.py
+### database/models.py
 ```py
 from flask_sqlalchemy import SQLAlchemy
 
@@ -140,7 +140,7 @@ class Record(db.Model):
             "score": self.score
         }
 ```
-### routes.py
+### routes/api_routes.py
 ```py
 from flask import Blueprint, request, jsonify
 from database.models import db, Record
@@ -172,7 +172,7 @@ def add_record():
 def validate():
     return jsonify(validate_data())
 ```
-### services.py
+### services/validation_service.py
 ```py
 import pandas as pd
 from database.models import Record
