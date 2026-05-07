@@ -50,20 +50,26 @@ python-rest-api/
 
 ## 💻 How To Run
 
-1.  **Clone the Repository**
-    ```bash
-    git clone https://github.com/yourusername/python-rest-api.git
+1. **Clone the Repository**
+```bash
+git clone https://github.com/yourusername/python-rest-api.git
 cd python-rest-api
-    ```
+```
 2.  **Create Virtual Environment**
+```bash
     python3 -m venv venv
     source venv/bin/activate
-    
-4.  **Install Dependencies**
+```
+3.  **Install Dependencies**
+```bash 
     * pip install -r requirements.txt
-5.  **Run**
-    * v
-
+```
+4.  **Run**
+```bash 
+    python app.py
+```
+5.  **Access the Application
+http://127.0.0.1:5000
 ---
 
 ## Source Code
