@@ -74,7 +74,126 @@ http://127.0.0.1:5000
 ```
 ---
 
+## API Endpoints
+Get All Records
+```bash 
+GET /records
+```
+Add New Record
+```bash 
+Post /records
+```
+Request Body
+```bash 
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "score": 85
+}
+```
+Validate Data
+```bash
+GET /validate
+```
+
 ## Source Code
 
-### Book.java
-```java
+### app.py
+```py
+from flask import Flask
+from routes.api_routes import api
+from database.models import db
+
+app = Flask(__name__)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database/database.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db.init_app(app)
+
+with app.app_context():
+    db.create_all()
+
+app.register_blueprint(api)
+
+if __name__ == "__main__":
+    app.run(debug=True)
+```
+
+### database.py
+```py
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
+
+class Record(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), nullable=False)
+    score = db.Column(db.Integer, nullable=False)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "email": self.email,
+            "score": self.score
+        }
+```
+### routes.py
+```py
+from flask import Blueprint, request, jsonify
+from database.models import db, Record
+from services.validation_service import validate_data
+
+api = Blueprint('api', __name__)
+
+@api.route('/records', methods=['GET'])
+def get_records():
+    records = Record.query.all()
+    return jsonify([r.to_dict() for r in records])
+
+@api.route('/records', methods=['POST'])
+def add_record():
+    data = request.get_json()
+
+    new_record = Record(
+        name=data['name'],
+        email=data['email'],
+        score=data['score']
+    )
+
+    db.session.add(new_record)
+    db.session.commit()
+
+    return jsonify({"message": "Record added successfully"}), 201
+
+@api.route('/validate', methods=['GET'])
+def validate():
+    return jsonify(validate_data())
+```
+### services.py
+```py
+import pandas as pd
+from database.models import Record
+
+def validate_data():
+    records = Record.query.all()
+
+    data = [{
+        "id": r.id,
+        "name": r.name,
+        "email": r.email,
+        "score": r.score
+    } for r in records]
+
+    df = pd.DataFrame(data)
+
+    return {
+        "missing_values": df.isnull().sum().to_dict(),
+        "duplicate_records": int(df.duplicated().sum()),
+        "invalid_scores": int((df["score"] < 0).sum())
+    }
+```
+
+
